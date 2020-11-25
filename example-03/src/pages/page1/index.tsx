@@ -1,10 +1,10 @@
 import React from 'react'
 
-// import { Container } from './styles'
+import { Title } from './style'
 
 const Page1: React.FC = () => {
   return (
-    <h1>Page 1</h1>
+    <Title>Page 1</Title>
   )
 }
 
