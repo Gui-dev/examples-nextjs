@@ -1,12 +1,12 @@
 import { NextApiRequest, NextApiResponse } from 'next'
+import { connectToDatabase } from './../../../utils/mongodb'
 
-const handler = (request: NextApiRequest, response: NextApiResponse) => {
+const handler = async (request: NextApiRequest, response: NextApiResponse) => {
   try {
-    response.status(201).json([
-      { id: 1, name: 'Jessi Lara' },
-      { id: 1, name: 'Vini Diniz' },
-      { id: 1, name: 'Davi Diniz' }
-    ])
+    const { db } = await connectToDatabase()
+    const data = await db.collection('users').find().toArray()
+    
+    return response.status(201).json(data)
   } catch (error) {
     response.status(500).json({ statusCode: 500, message: error.message })
   }
